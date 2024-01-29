@@ -26,4 +26,5 @@ jobs:
 
     - name: Run
       run: make run
+      timeout-minutes: 2
 
