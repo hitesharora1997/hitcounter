@@ -26,7 +26,7 @@ func TestServerPersistenceAndRestart(t *testing.T) {
 		t.Fatalf("Failed to create testdata directory: %v", err)
 	}
 
-	mockTime = time.Now()
+	mockTime = time.Date(2024, 01, 29, 0, 0, 0, 0, time.UTC)
 	srv := server.NewServer(dataFile, mockTimeProvider)
 	defer srv.Stop()
 

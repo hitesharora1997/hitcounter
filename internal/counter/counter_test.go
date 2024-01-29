@@ -1,9 +1,10 @@
 package counter_test
 
 import (
-	"github.com/hitesharora1997/hitcounter/internal/counter"
 	"testing"
 	"time"
+
+	"github.com/hitesharora1997/hitcounter/internal/counter"
 )
 
 var mockTime time.Time
@@ -13,7 +14,8 @@ func mockTimeProvider() time.Time {
 }
 
 func TestRequestCounter_RecordAndCount(t *testing.T) {
-	mockTime = time.Now()
+	mockTime = time.Date(2024, 01, 29, 0, 0, 0, 0, time.UTC)
+
 	counter := counter.NewRequestCounter(mockTimeProvider)
 
 	for i := 0; i < 5; i++ {
