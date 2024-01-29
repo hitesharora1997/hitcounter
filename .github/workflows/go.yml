@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -20,7 +22,6 @@ jobs:
         with:
           go-version: 1.21.5
 
-      # Adding cache for Go modules
       - name: Cache Go modules
         uses: actions/cache@v2
         with:
@@ -34,10 +35,13 @@ jobs:
   
       - name: Test
         run: make test
-      
-      - name: Run
+
+      - name: Run server
         run: |
           make run &
           server_pid=$!
           echo "Server started with PID: $server_pid"
+          sleep 1m 
+          echo "Stopping server..."
+          kill $server_pid || true  # Send a signal to terminate the server
           wait $server_pid || true  # Wait for server to finish or error
